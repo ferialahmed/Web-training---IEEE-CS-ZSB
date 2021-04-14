@@ -1,8 +1,0 @@
-#myInput{
-    width:400px;height: 40px;border:none;border-bottom:solid 1px black;color: black;background-color:cornsilk;font-size: 20px;
-}
-#key{width:200px;height: 40px;border:none;border-bottom:solid 1px black;color: black;background-color:cornsilk;font-size: 20px;}
-#search,#sort{
-    background-color: rgb(196,0,0);width: 150px;height: 40px;border-radius: 5px;border: none;color: white;font-size: 20px;display: block;margin-top: 10px
-}
-.output{background-color: ghostwhite}

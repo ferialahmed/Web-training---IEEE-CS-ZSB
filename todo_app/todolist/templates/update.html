@@ -1,0 +1,17 @@
+{% extends 'home.html' %}
+{% block content %}
+<h2>Edit your Task</h2>
+<form method="POST" action="">
+    {% csrf_token %}
+    
+    {{forms.title}}
+    <br>
+    <br>
+    {{forms.done.label}}
+    
+    {{forms.done}}
+    <br>
+    <br>
+    <button class="btn btn-info " type="submit">Submit</button>
+</form>
+{% endblock %}

@@ -1,8 +1,0 @@
-<p>Are you sure you want to delete '{{task}}'?</p>
-
-<button><a href="{% url 'home' %}">No</a></button>
-<form method="POST" action="">
-    {% csrf_token %}
-    
-    <button type="submit">Yes</button>
-</form>

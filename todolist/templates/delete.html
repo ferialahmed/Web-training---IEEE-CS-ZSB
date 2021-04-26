@@ -1,8 +1,13 @@
-<p>Are you sure you want to delete '{{task}}'?</p>
+{% extends 'home.html' %}
+{% block content %}
+<h2>Are you sure you want to delete '{{task}}'?</h2>
 
-<button><a href="{% url 'home' %}">No</a></button>
+<a class="btn btn-warning " href="{% url 'home' %}">Cancel</a>
+<br>
+<br>
 <form method="POST" action="">
     {% csrf_token %}
     
-    <button type="submit">Yes</button>
+    <button class="btn btn-danger " type="submit">Delete</button>
 </form>
+{% endblock %}

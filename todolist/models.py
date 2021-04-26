@@ -8,3 +8,5 @@ class Tasks(models.Model):
 
     def __str__(self): 
         return self.title #this function return the name of the specified task
+
+   

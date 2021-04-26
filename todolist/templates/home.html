@@ -23,28 +23,38 @@
     <body class="bg-secondary">
         
         {% include 'navbar.html' %}
-        <div class="parent container bg-info">
-            <div class=" col-md-8 mx-auto">
+        <!-- <div class="parent container bg-info">
+            <div class=" col-md-8 mx-auto"> -->
+                <br>
+                <h3>Number of users is: {{count}}</h3>
+                <div class="container">
+                <div class="card">
+                    <div class="card-body">
+                        {% block content %}
                 <form method="POST" action="/">
                     {% csrf_token %}
                     {{forms.title}}
                     
-                    <button class="btn-danger" type="submit">Add Task</button>
+                    <button class="btn btn-dark " type="submit">Add Task</button>
                 </form>
 
-               
+                <!-- <div class="card">
+                    <div class="card-body"> -->
                     {% for task in tasks %}
+                    <br>
                         <div class="row">
-                            <div class="col">
+                            <div class="col-sm-4">
                                 
-                                <a href= "{% url 'update_task' task.id %}" >Edit</a>
+                                <a class
+                            ="btn btn-primary btn-sm"
+                            href= "{% url 'update_task' task.id %}" >Edit</a>
                             </div>
                             
-                            <div class="col">
-                                <a href= "{% url 'delete_task' task.id %}" >Delete</a>
+                            <div class="col-sm-4">
+                                <a class="btn btn-danger btn-sm" href= "{% url 'delete_task' task.id %}" >Delete</a>
                             </div>
                             
-                            <div class="col">
+                            <div class="col-sm-4">
                                 {% if task.done == True %}
                                     <strike>{{task.title}}</strike>
                                 {% else %}
@@ -53,8 +63,10 @@
                             </div>
                         </div>
                     {% endfor %}
-                
+                    {% endblock %}
             </div>
         </div>
+        </div>
+        
     </body>
 </html>

@@ -1,9 +1,46 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.forms import inlineformset_factory
 from .models import Tasks
-from .form import *
-def home(request):
+from .form import CreateUserFom, Taskform
+from django.contrib.auth import authenticate, login, logout, get_user_model
 
+def register(request):
+
+    form=CreateUserFom()
+    # user=UserCreationForm()
+    if request.method == "POST":
+        form=CreateUserFom(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/login')
+    context={'form':form}
+    return render(request,'register.html',context)
+
+def loginPage(request):
+
+    # form=CreateUserFom()
+    # user=UserCreationForm()
+    # username=request.POST['password']
+    if request.method == "POST":
+        username=request.POST['username']
+        password=request.POST['password']
+        user=authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        # else:
+        #     return redirect("register")
+    context={}
+    return render(request,'login.html',context)
+
+def logoutPage(request):
+    return render(request,'login.html')
+def home(request):
+    user=get_user_model()
+    Users=user.objects.all()
+    count=Users.count()
     forms=Taskform()
     tasks=Tasks.objects.all()
     if request.method == 'POST':
@@ -13,7 +50,7 @@ def home(request):
         return redirect('/')
 
 
-    context={'tasks':tasks,'forms':forms}
+    context={'tasks':tasks,'forms':forms,'count':count}
     return render(request,'home.html', context)
 
 def editTask(request, pk):
@@ -26,7 +63,7 @@ def editTask(request, pk):
         return redirect('/')
 
     context={'forms':forms}
-    return render(request, 'updated.html', context)
+    return render(request, 'update.html', context)
 
 def delTask(request, pk):
     tasks=Tasks.objects.get(id=pk)
